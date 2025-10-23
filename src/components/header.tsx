@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Logo from "@/components/logo";
 import {Menu, X} from 'lucide-react';
 import {useState} from 'react';
+import { useScrollLock } from './ScrollLockContext';
 
 interface HeaderProps {
     currentSection: number;
@@ -11,6 +12,7 @@ interface HeaderProps {
 
 export default function Header({currentSection, onSectionChange}: HeaderProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { lockScroll, unlockScroll } = useScrollLock();
 
     const sections = [
         {title: 'Главная', number: '00'},
@@ -24,6 +26,17 @@ export default function Header({currentSection, onSectionChange}: HeaderProps) {
     const handleSectionClick = (index: number) => {
         onSectionChange(index);
         setIsMobileMenuOpen(false);
+        unlockScroll();
+    };
+
+    const handleMenuToggle = () => {
+        if (isMobileMenuOpen) {
+            setIsMobileMenuOpen(false);
+            unlockScroll();
+        } else {
+            setIsMobileMenuOpen(true);
+            lockScroll();
+        }
     };
 
     return (
@@ -84,7 +97,7 @@ export default function Header({currentSection, onSectionChange}: HeaderProps) {
 
                     {/* Burger Menu Button */}
                     <button
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        onClick={handleMenuToggle}
                         className="p-2 rounded-md hover:bg-gray-100 transition-colors"
                         aria-label="Открыть меню"
                     >
@@ -100,7 +113,10 @@ export default function Header({currentSection, onSectionChange}: HeaderProps) {
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
                 <div className="lg:hidden fixed inset-0 z-40 "
-                     onClick={() => setIsMobileMenuOpen(false)}>
+                     onClick={() => {
+                         setIsMobileMenuOpen(false);
+                         unlockScroll();
+                     }}>
                     <div className="fixed top-0 left-0 right-0 bg-white shadow-lg" onClick={(e) => e.stopPropagation()}>
                         <div className="pt-16 pb-4">
                             {/* Navigation Items */}
