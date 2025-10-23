@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import Hero from './hero';
 import AboutProject from './sections/AboutProject';
 import SystemArchitecture from './sections/SystemArchitecture';
@@ -13,7 +13,8 @@ interface ScrollContainerProps {
     currentSection: number;
 }
 
-export default function ScrollContainer({ onSectionChange, currentSection }: ScrollContainerProps) {
+const ScrollContainer = forwardRef<{ scrollToSection: (index: number) => void }, ScrollContainerProps>(
+    ({ onSectionChange, currentSection }, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const isScrolling = useRef(false);
     const lastScrollTime = useRef(0);
@@ -27,8 +28,34 @@ export default function ScrollContainer({ onSectionChange, currentSection }: Scr
         { component: AboutUs, id: 'about-us' },
     ];
 
+    // Функция для прокрутки к секции на мобильных устройствах
+    const scrollToSection = (index: number) => {
+        if (window.innerWidth < 1024) {
+            const mobileContainer = containerRef.current?.querySelector('.lg\\:hidden');
+            if (mobileContainer) {
+                const sectionElements = mobileContainer.querySelectorAll('[data-section]');
+                const targetSection = sectionElements[index] as HTMLElement;
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        }
+    };
+
+    useImperativeHandle(ref, () => ({
+        scrollToSection
+    }));
+
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
+            // На мобильных устройствах отключаем слайд-скролл
+            if (window.innerWidth < 1024) {
+                return;
+            }
+            
             e.preventDefault();
             
             const now = Date.now();
@@ -73,23 +100,47 @@ export default function ScrollContainer({ onSectionChange, currentSection }: Scr
     return (
         <div 
             ref={containerRef}
-            className="h-screen w-full overflow-hidden relative"
+            className="h-screen w-full relative"
         >
-            {sections.map((section, index) => {
-                const Component = section.component;
-                return (
-                    <div 
-                        key={section.id}
-                        className="absolute h-screen w-full"
-                        style={{
-                            transform: `translateY(${(index - currentSection) * 100}vh)`,
-                            transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
-                        }}
-                    >
-                        <Component />
-                    </div>
-                );
-            })}
+            {/* Desktop: Slide-based navigation */}
+            <div className="hidden lg:block lg:overflow-hidden lg:h-full">
+                {sections.map((section, index) => {
+                    const Component = section.component;
+                    return (
+                        <div 
+                            key={section.id}
+                            className="absolute h-screen w-full"
+                            style={{
+                                transform: `translateY(${(index - currentSection) * 100}vh)`,
+                                transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+                            }}
+                        >
+                            <Component />
+                        </div>
+                    );
+                })}
+            </div>
+            
+            {/* Mobile: Normal scroll */}
+            <div className="lg:hidden pt-16 overflow-y-auto h-full">
+                {sections.map((section, index) => {
+                    const Component = section.component;
+                    return (
+                        <div 
+                            key={section.id}
+                            data-section={index}
+                            className="w-full"
+                            style={{
+                                minHeight: '100vh'
+                            }}
+                        >
+                            <Component />
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
-}
+});
+
+export default ScrollContainer;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {Manrope, Rethink_Sans} from "next/font/google";
 import "./globals.css";
+import MobileScrollLock from "@/components/MobileScrollLock";
 
 const geistSans = Rethink_Sans({
   variable: "--font-rethink-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <MobileScrollLock />
         {children}
       </body>
     </html>
