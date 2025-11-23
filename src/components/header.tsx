@@ -69,14 +69,25 @@ export default function Header({currentSection, onSectionChange}: HeaderProps) {
                             </div>
                         ))}
                     </div>
-                    <div className="h-1/5 w-64 py-5 flex flex-col justify-start items-start p-5 pr-6 space-y-3">
-                        <div className='text-xs text-gray-500'>Проект реализован при поддержке Фонда содействия
+                    <div className="h-1/5 w-64 py-5 flex flex-col justify-start items-start p-5 pr-6 space-y-3 font-ru">
+                        <div className='text-xs text-gray-500 font-ru'>Проект реализован при поддержке Фонда содействия
                             инновациям в
                             рамках программы
                             «Студенческий стартап» мероприятия «Платформа университетского технологического
                             предпринимательства» федерального проекта «Технологии».
                         </div>
-                        <div className='text-sm text-gray-500'>ООО"ZALUPA"</div>
+                        <div className='text-sm text-gray-500 font-ru'>ООО "ТЕХНОЛОГИИ ВЛАДЕНИЯ"</div>
+                        <div className='text-xs text-gray-500 font-ru'>
+                            Дизайн и разработка{' '}
+                            <a 
+                                href="https://fluttrium.com" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="underline hover:text-gray-700 font-ru"
+                            >
+                                Fluttrium
+                            </a>
+                        </div>
                         <Image
                             src="/FASIE.SVG"
                             width={128}
@@ -142,14 +153,25 @@ export default function Header({currentSection, onSectionChange}: HeaderProps) {
                             </nav>
 
                             {/* Footer Info */}
-                            <div className="px-4 mt-6 pt-4 border-t border-gray-200">
-                                <div className='text-xs text-gray-500 mb-3'>Проект реализован при поддержке Фонда
+                            <div className="px-4 mt-6 pt-4 border-t border-gray-200 font-ru">
+                                <div className='text-xs text-gray-500 mb-3 font-ru'>Проект реализован при поддержке Фонда
                                     содействия инновациям в
                                     рамках программы
                                     «Студенческий стартап» мероприятия «Платформа университетского технологического
                                     предпринимательства» федерального проекта «Технологии».
                                 </div>
-                                <div className='text-sm text-gray-500 mb-3'>ООО"ZALUPA"</div>
+                                <div className='text-sm text-gray-500 mb-3 font-ru'>ООО "ТЕХНОЛОГИИ ВЛАДЕНИЯ"</div>
+                                <div className='text-xs text-gray-500 mb-3 font-ru'>
+                                    Дизайн и разработка{' '}
+                                    <a 
+                                        href="https://fluttrium.com" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="underline hover:text-gray-700 font-ru"
+                                    >
+                                        Fluttrium
+                                    </a>
+                                </div>
                                 <Image
                                     src="/FASIE.SVG"
                                     width={96}
