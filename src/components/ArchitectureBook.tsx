@@ -126,18 +126,18 @@ export default function ArchitectureBook() {
 
     return (
         <div 
-            className="flex h-screen w-full justify-center items-center tech-grid-bg relative overflow-hidden"
+            className="flex h-screen w-full justify-center items-center relative overflow-hidden bg-[radial-gradient(at_60%_90%,#FA9819_40%,#48749E_120%)]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
             {/* Logo и название сверху */}
             <div className="absolute top-4 md:top-8 left-1/2 -translate-x-1/2 z-20 flex flex-col md:flex-row items-center gap-2 md:gap-4 px-4">
-                <Logo size={40} textSize="text-3xl md:text-6xl" bold="font-extrabold" color="text-slate-100" iconColor="#f8fafc"/>
-                <div className="text-slate-100 font-ru text-center md:text-left">
-                    <h2 className="text-xl md:text-3xl font-bold drop-shadow-lg font-ru">
+                <Logo size={40} textSize="text-3xl md:text-6xl" bold="font-extrabold" color="text-white" iconColor="#ffffff"/>
+                <div className="text-white font-ru text-center md:text-left">
+                    <h2 className="text-xl md:text-3xl font-bold drop-shadow-2xl font-ru">
                         {architecturePages[currentPage].title}
                     </h2>
-                    <p className="text-xs md:text-sm text-slate-300 mt-1 font-ru">
+                    <p className="text-xs md:text-sm text-white/90 mt-1 font-ru drop-shadow-lg">
                         {architecturePages[currentPage].description}
                     </p>
                 </div>
@@ -205,15 +205,15 @@ export default function ArchitectureBook() {
                                             ) : (
                                                 <div className="text-center">
                                                     <div className="text-6xl mb-4">📐</div>
-                                                    <p className="text-slate-300 font-ru">Схема архитектуры</p>
-                                                    <p className="text-sm text-slate-400 mt-2 font-ru">{page.title}</p>
+                                                    <p className="text-white/90 font-ru drop-shadow-md">Схема архитектуры</p>
+                                                    <p className="text-sm text-white/80 mt-2 font-ru drop-shadow-sm">{page.title}</p>
                                                 </div>
                                             )}
                                         </div>
                                     </div>
 
                                     {/* Номер страницы */}
-                                    <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 bg-slate-800/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-full border border-slate-600/50 shadow-sm text-slate-300 font-ru text-xs md:text-sm font-semibold">
+                                    <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 bg-white/20 backdrop-blur-sm px-2 md:px-3 py-1 rounded-full border border-white/40 shadow-sm text-white font-ru text-xs md:text-sm font-semibold drop-shadow-md">
                                         {page.id} / {totalPages}
                                     </div>
                                 </div>

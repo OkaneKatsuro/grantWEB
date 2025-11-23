@@ -70,13 +70,9 @@ li, ul, ol, td, th, table {
   animation: shimmer 2s infinite;
 }
 
-/* Технический фон с сеткой в стиле Fluttrium */
+/* Темный фон */
 .tech-grid-bg {
-  background-color: #020817; /* Темный фон как на fluttrium.com */
-  background-image: 
-    linear-gradient(to right, rgba(79, 79, 79, 0.18) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(79, 79, 79, 0.18) 1px, transparent 1px);
-  background-size: 14px 24px;
+  background-color: #0a0a0a;
   position: relative;
 }
 
