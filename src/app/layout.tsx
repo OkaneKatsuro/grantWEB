@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {Manrope, Rethink_Sans} from "next/font/google";
+import {Manrope, Rethink_Sans, Share_Tech_Mono} from "next/font/google";
 import "./globals.css";
 import { ScrollLockProvider } from "@/components/ScrollLockContext";
 
@@ -13,10 +13,16 @@ const geistMono = Manrope({
   subsets: ["cyrillic"],
 });
 
+const shareTechMono = Share_Tech_Mono({
+  variable: "--font-share-tech-mono",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 
 
 export const metadata: Metadata = {
-  title: "Название",
+  title: "RentFlow",
   description: "Система автоматизации бизнес процессов в сфере аранеды недвидимости",
 };
 
@@ -26,9 +32,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={shareTechMono.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${shareTechMono.variable} antialiased`}
+        style={{ fontFamily: 'var(--font-share-tech-mono)' }}
       >
         <ScrollLockProvider>
           {children}

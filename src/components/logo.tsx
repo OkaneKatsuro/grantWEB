@@ -12,8 +12,8 @@ export default function Logo({ size, textSize = "text-3xl", bold = "font-bold", 
     return (
         <>
             <GitPullRequestArrow size={size} color={iconColor} />
-            <div className={`font-ru ${textSize} ${bold} ${color} `}>
-                НАЗВАНИЕ
+            <div className={`font-logo ${textSize} ${bold} ${color} tracking-tight`}>
+                RentFlow
             </div>
         </>
     )
