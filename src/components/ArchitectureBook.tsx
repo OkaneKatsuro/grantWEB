@@ -197,7 +197,6 @@ export default function ArchitectureBook() {
                                                         priority={currentPage === index}
                                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                                                         onError={() => {
-                                                            // Если изображение не загрузилось, добавляем в список ошибок
                                                             setImageErrors(prev => new Set(prev).add(page.id));
                                                         }}
                                                         unoptimized
