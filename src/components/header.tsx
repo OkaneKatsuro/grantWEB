@@ -191,7 +191,7 @@ export default function Header() {
                                     «Студенческий стартап» мероприятия «Платформа университетского технологического
                                     предпринимательства» федерального проекта «Технологии».
                                 </div>
-                                <div className='text-sm text-gray-500 mb-3'>ООО "ТЕХНОЛОГИИ ВЛАДЕНИЯ"</div>
+                                <div className='text-sm text-gray-500 mb-3'>ООО"ZALUPA"</div>
                                 <Image
                                     src="/FASIE.SVG"
                                     width={96}

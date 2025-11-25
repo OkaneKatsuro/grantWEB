@@ -13,7 +13,7 @@ export default function Logo({ size, textSize = "text-3xl", bold = "font-bold", 
         <>
             <GitPullRequestArrow size={size} color={iconColor} />
             <div className={`font-ru ${textSize} ${bold} ${color} `}>
-                RENTflow
+                RentFlow
             </div>
         </>
     )

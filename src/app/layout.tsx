@@ -15,7 +15,7 @@ const geistMono = Manrope({
 
 
 export const metadata: Metadata = {
-  title: "RENTflow",
+  title: "RentFlow",
   description: "Система автоматизации бизнес процессов в сфере аранеды недвидимости",
 };
 

@@ -80,7 +80,7 @@ export default function AboutProject() {
     <div className="min-h-screen w-full overflow-x-hidden">
 
       {/* Hero секция - Gradient 2: Orange с Blue Tint (радиальный) */}
-      <section className="min-h-screen flex items-center justify-center  md:px-12 overflow-x-hidden" style={{ background: 'radial-gradient(ellipse at bottom right, #B6C9CF 0%, #FA9819 70%, #FA9819 100%)' }}>
+      <section className="min-h-screen flex items-center justify-center px-6  md:px-12 overflow-x-hidden" style={{ background: 'radial-gradient(ellipse at bottom right, #B6C9CF 0%, #FA9819 70%, #FA9819 100%)' }}>
         <div className="max-w-7xl w-full">
           
           <FadeUp delay={0.1}>
