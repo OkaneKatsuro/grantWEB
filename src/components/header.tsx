@@ -2,81 +2,124 @@
 import Image from 'next/image'
 import Logo from "@/components/logo";
 import {Menu, X} from 'lucide-react';
-import {useState} from 'react';
-import { useScrollLock } from './ScrollLockContext';
+import {useState, useEffect, useMemo} from 'react';
 
-interface HeaderProps {
-    currentSection: number;
-    onSectionChange: (sectionIndex: number) => void;
-}
-
-export default function Header({currentSection, onSectionChange}: HeaderProps) {
+export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const { lockScroll, unlockScroll } = useScrollLock();
+    const [activeSection, setActiveSection] = useState('hero');
 
-    const sections = [
-        {title: 'Главная', number: '00'},
-        {title: 'О проекте', number: '01'},
-        {title: 'Архитектура системы', number: '02'},
-        {title: 'Этапы развития', number: '03'},
-        {title: 'Наша команда', number: '04'},
-        {title: 'О нас', number: '05'},
-    ];
+    const sections = useMemo(() => [
+        {title: 'Главная', number: '00', id: 'hero'},
+        {title: 'О проекте', number: '01', id: 'about'},
+        {title: 'Архитектура системы', number: '02', id: 'architecture'},
+        {title: 'Этапы развития', number: '03', id: 'stages'},
+        {title: 'Наша команда', number: '04', id: 'team'},
+        {title: 'О нас', number: '05', id: 'about-us'},
+    ], []);
 
-    const handleSectionClick = (index: number) => {
-        onSectionChange(index);
+    // Отслеживание активной секции при скролле
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + (window.innerWidth >= 1024 ? 300 : 100);
+            
+            for (const section of sections) {
+                const element = document.getElementById(section.id);
+                if (element) {
+                    const offsetTop = element.offsetTop;
+                    const offsetBottom = offsetTop + element.offsetHeight;
+                    
+                    if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+                        setActiveSection(section.id);
+                        break;
+                    }
+                }
+            }
+        };
+
+        // Throttle для производительности
+        let ticking = false;
+        const throttledScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', throttledScroll, { passive: true });
+        handleScroll(); // Проверяем при загрузке
+
+        return () => window.removeEventListener('scroll', throttledScroll);
+    }, [sections]);
+
+    const handleSectionClick = (sectionId: string) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
         setIsMobileMenuOpen(false);
-        unlockScroll();
     };
 
     const handleMenuToggle = () => {
-        if (isMobileMenuOpen) {
-            setIsMobileMenuOpen(false);
-            unlockScroll();
-        } else {
-            setIsMobileMenuOpen(true);
-            lockScroll();
-        }
+        setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     return (
         <>
             {/* Desktop Header */}
-            <header className="hidden lg:block">
-                <div className="flex flex-col justify-start items-start h-screen w-full">
+            <header className="hidden lg:block fixed left-0 top-0 h-screen w-64 z-50">
+                <div className="flex flex-col justify-start items-start h-screen w-full bg-white border-r-2 border-gray-200">
                     <div
-                        className="h-1/5 w-64 flex flex-row justify-center items-center border-b-2 border-gray-200 space-x-1.5 ">
+                        className="h-1/5 w-full flex flex-row justify-center items-center border-b-2 border-gray-200 space-x-1.5 ">
                         <Logo size={32} textSize="text-3xl" iconColor='black'/>
                     </div>
                     <div
-                        className="h-2/5 w-64 py-5 flex flex-col justify-start items-start p-5 border-b-2 border-gray-200 space-y-1.5">
-                        {sections.map((section, index) => (
+                        className="h-2/5 w-full py-5 flex flex-col justify-start items-start p-5 border-b-2 border-gray-200 space-y-1.5">
+                        {sections.map((section) => (
                             <div
-                                key={index}
-                                className={`flex flex-row cursor-pointer transition-all duration-300 hover:bg-gray-50 p-2 rounded`}
-                                onClick={() => onSectionChange(index)}
+                                key={section.id}
+                                className={`flex flex-row cursor-pointer transition-all duration-300 hover:bg-gray-50 p-2 rounded w-full`}
+                                onClick={() => handleSectionClick(section.id)}
                             >
                                 <div className={`font-ru text-2x font-bold ${
-                                    currentSection === index ? 'text-gray-500' : 'text-gray-800'
+                                    activeSection === section.id ? 'text-gray-500' : 'text-gray-800'
                                 }`}>
                                     {section.title}
                                 </div>
                                 <div className={`font-ru text-[10px] uppercase font-semibold ml-2 ${
-                                    currentSection === index ? 'text-hero-1' : 'text-gray-500'
-                                }`}>
+                                    activeSection === section.id ? '' : 'text-gray-500'
+                                }`}
+                                style={activeSection === section.id ? { color: '#FA9819' } : {}}
+                                >
                                     {section.number}
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="h-1/5 w-64 py-5 flex flex-col justify-start items-start p-5 pr-6 space-y-3">
-                        <div className='text-xs text-gray-500'>Проект реализован при поддержке Фонда содействия
+                    <div className="h-1/5 w-64 py-5 flex flex-col justify-start items-start p-5 pr-6 space-y-3 font-ru">
+                        <div className='text-xs text-gray-500 font-ru'>Проект реализован при поддержке Фонда содействия
                             инновациям в
                             рамках программы
                             «Студенческий стартап» мероприятия «Платформа университетского технологического
                             предпринимательства» федерального проекта «Технологии».
                         </div>
-                        <div className='text-sm text-gray-500'>ООО"ZALUPA"</div>
+                        <div className='text-sm text-gray-500 font-ru'>ООО "ТЕХНОЛОГИИ ВЛАДЕНИЯ"</div>
+                        <div className='text-xs text-gray-500 font-ru'>
+                            Дизайн и разработка{' '}
+                            <a 
+                                href="https://fluttrium.com" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="underline hover:text-gray-700 font-ru"
+                            >
+                                Fluttrium
+                            </a>
+                        </div>
                         <Image
                             src="/FASIE.SVG"
                             width={128}
@@ -112,29 +155,28 @@ export default function Header({currentSection, onSectionChange}: HeaderProps) {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden fixed inset-0 z-40 "
-                     onClick={() => {
-                         setIsMobileMenuOpen(false);
-                         unlockScroll();
-                     }}>
+                <div className="lg:hidden fixed inset-0 z-40 bg-black/50"
+                     onClick={() => setIsMobileMenuOpen(false)}>
                     <div className="fixed top-0 left-0 right-0 bg-white shadow-lg" onClick={(e) => e.stopPropagation()}>
                         <div className="pt-16 pb-4">
                             {/* Navigation Items */}
                             <nav className="px-4">
-                                {sections.map((section, index) => (
+                                {sections.map((section) => (
                                     <div
-                                        key={index}
+                                        key={section.id}
                                         className={`flex flex-row cursor-pointer transition-all duration-300 hover:bg-gray-50 p-3 rounded-lg mb-2`}
-                                        onClick={() => handleSectionClick(index)}
+                                        onClick={() => handleSectionClick(section.id)}
                                     >
                                         <div className={`font-ru text-lg font-bold ${
-                                            currentSection === index ? 'text-gray-500' : 'text-gray-800'
+                                            activeSection === section.id ? 'text-gray-500' : 'text-gray-800'
                                         }`}>
                                             {section.title}
                                         </div>
                                         <div className={`font-ru text-xs uppercase font-semibold ml-2 mt-1 ${
-                                            currentSection === index ? 'text-hero-1' : 'text-gray-500'
-                                        }`}>
+                                            activeSection === section.id ? '' : 'text-gray-500'
+                                        }`}
+                                        style={activeSection === section.id ? { color: '#FA9819' } : {}}
+                                        >
                                             {section.number}
                                         </div>
                                     </div>
@@ -149,7 +191,7 @@ export default function Header({currentSection, onSectionChange}: HeaderProps) {
                                     «Студенческий стартап» мероприятия «Платформа университетского технологического
                                     предпринимательства» федерального проекта «Технологии».
                                 </div>
-                                <div className='text-sm text-gray-500 mb-3'>ООО"ZALUPA"</div>
+                                <div className='text-sm text-gray-500 mb-3'>ООО "ТЕХНОЛОГИИ ВЛАДЕНИЯ"</div>
                                 <Image
                                     src="/FASIE.SVG"
                                     width={96}

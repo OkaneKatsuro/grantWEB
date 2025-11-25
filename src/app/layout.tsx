@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {Manrope, Rethink_Sans} from "next/font/google";
 import "./globals.css";
-import { ScrollLockProvider } from "@/components/ScrollLockContext";
 
 const geistSans = Rethink_Sans({
   variable: "--font-rethink-sans",
@@ -16,7 +15,7 @@ const geistMono = Manrope({
 
 
 export const metadata: Metadata = {
-  title: "Название",
+  title: "RENTflow",
   description: "Система автоматизации бизнес процессов в сфере аранеды недвидимости",
 };
 
@@ -30,9 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ScrollLockProvider>
-          {children}
-        </ScrollLockProvider>
+        {children}
       </body>
     </html>
   );
