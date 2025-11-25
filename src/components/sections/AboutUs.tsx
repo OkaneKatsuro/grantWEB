@@ -56,12 +56,12 @@ export default function AboutUs() {
                     </a>
                     
                     <a
-                        href="tel:+79214570057"
+                        href="tel:+74994901183"
                         className="flex items-center justify-between bg-black/40 hover:bg-black/50 border-2 border-white/50 hover:border-white/60 rounded-lg p-4 md:p-6 transition-all group font-ru shadow-xl"
                     >
                         <div className="flex items-center gap-3">
                             <Phone className="w-5 h-5 text-white/80 group-hover:text-white transition-colors" />
-                            <span className="text-base md:text-lg text-white font-ru drop-shadow-md">+7 921 457 00 57</span>
+                            <span className="text-base md:text-lg text-white font-ru drop-shadow-md">+7 499 4901183</span>
                         </div>
                         </a>
                     </div>
