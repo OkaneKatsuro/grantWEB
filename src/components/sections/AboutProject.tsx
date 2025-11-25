@@ -180,10 +180,10 @@ export default function AboutProject() {
         <div className="max-w-5xl mx-auto text-center">
           <FadeUp>
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
-              Precise<br />
-              Trustworthy<br />
-              Approachable<br />
-              Reliable
+            Точность<br />
+            Надёжность<br />
+            Открытость<br />
+            Стабильность
             </h2>
           </FadeUp>
         </div>
