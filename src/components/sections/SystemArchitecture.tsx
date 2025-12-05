@@ -72,7 +72,7 @@ export default function SystemArchitecture() {
   ]
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden">
+    <div className="min-h-screen w-full overflow-x-hidden bg-white">
 
       {/* Hero секция */}
       <section 

@@ -3,7 +3,7 @@
 import Hero from '@/components/hero';
 import AboutProject from '@/components/sections/AboutProject';
 import SystemArchitecture from '@/components/sections/SystemArchitecture';
-import DevelopmentStages from '@/components/sections/DevelopmentStages';
+
 import OurTeam from '@/components/sections/OurTeam';
 import AboutUs from '@/components/sections/AboutUs';
 import Header from '@/components/header';
@@ -25,10 +25,7 @@ export default function Home() {
           <SystemArchitecture />
         </section>
 
-        <section id="stages" className="w-full overflow-x-hidden">
-          <DevelopmentStages />
-        </section>
-
+      
         <section id="team" className="w-full overflow-x-hidden">
           <OurTeam />
         </section>

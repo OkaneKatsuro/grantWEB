@@ -12,9 +12,8 @@ export default function Header() {
         {title: 'Главная', number: '00', id: 'hero'},
         {title: 'О проекте', number: '01', id: 'about'},
         {title: 'Архитектура системы', number: '02', id: 'architecture'},
-        {title: 'Этапы развития', number: '03', id: 'stages'},
-        {title: 'Наша команда', number: '04', id: 'team'},
-        {title: 'О нас', number: '05', id: 'about-us'},
+        {title: 'Наша команда', number: '03', id: 'team'},
+        {title: 'О нас', number: '04', id: 'about-us'},
     ], []);
 
     // Отслеживание активной секции при скролле
