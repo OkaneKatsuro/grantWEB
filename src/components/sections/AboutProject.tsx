@@ -6,19 +6,19 @@ export default function AboutProject() {
   const problems = [
     { 
       title: 'Разрозненные инструменты', 
-      desc: 'Excel, WhatsApp, Avito — всё отдельно. Информация теряется, задачи забываются.',
+      desc: 'Excel, WhatsApp, Avito — всё отдельно. Информация теряется, задачи не контролируются.',
     },
     { 
       title: 'Потеря денег из-за простоя', 
-      desc: 'Забыли обновить объявление — потеряли 2 недели. Не увидели сообщение — минус клиент.',
+      desc: 'Забыли обновить объявление или пропустили сообщение - потенциальные сделки не реализуются. ',
     },
     { 
       title: 'Нет приложения для арендаторов', 
-      desc: 'Арендаторы звонят 10+ раз в день с простыми вопросами о платежах и заявках.',
+      desc: 'Непрекращающиеся звонки арендаторов с простыми вопросами о платежах и заявках.',
     },
     { 
       title: 'Бумажная волокита', 
-      desc: 'Печать договоров, подписи, сканирование. Потом невозможно найти нужный документ.',
+      desc: 'Печать договоров, подписи, сканирование. Каждый раз трудности с поиском нужного документа',
     },
     { 
       title: 'Нет понимания бизнеса', 
@@ -77,14 +77,14 @@ export default function AboutProject() {
   ]
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden">
+    <div className="min-h-screen w-full overflow-x-hidden bg-white">
 
       {/* Hero секция - Gradient 2: Orange с Blue Tint (радиальный) */}
       <section className="min-h-screen flex items-center justify-center px-6  md:px-12 overflow-x-hidden" style={{ background: 'radial-gradient(ellipse at bottom right, #B6C9CF 0%, #FA9819 70%, #FA9819 100%)' }}>
         <div className="max-w-7xl w-full">
           
           <FadeUp delay={0.1}>
-            <h1 className="text-6xl md:text-8xl font-bold text-white mb-12 leading-tight tracking-tight">
+            <h1 className="text-6xl md:text-8xl font-bold text-white mb-12 leading-tight tracking-style={{ letterSpacing: '0.02em' }}tight">
               О проекте
             </h1>
           </FadeUp>
@@ -109,7 +109,7 @@ export default function AboutProject() {
                     Проблемы
                   </h2>
                   <p className="text-xl text-gray-600 leading-relaxed">
-                    Текущие боли рынка аренды недвижимости
+                  Боли в управлении недвижимостью возникают из-за отсутствия системы
                   </p>
                 </div>
               </FadeUp>
@@ -144,10 +144,10 @@ export default function AboutProject() {
                 <div className="sticky top-32">
                   <div className="text-[160px] font-bold leading-none mb-4" style={{ color: '#FA9819' }}>02</div>
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    Возможности
+                  RentFlow 
                   </h2>
                   <p className="text-xl text-gray-600 leading-relaxed">
-                    Что вы получаете с RentFlow
+                   – это возможность вести дела удобно и эффективно
                   </p>
                 </div>
               </FadeUp>
@@ -180,10 +180,10 @@ export default function AboutProject() {
         <div className="max-w-5xl mx-auto text-center">
           <FadeUp>
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
-            Точность<br />
+            Прозрачность<br />
             Надёжность<br />
-            Открытость<br />
             Стабильность
+         
             </h2>
           </FadeUp>
         </div>
@@ -202,7 +202,7 @@ export default function AboutProject() {
                     Для кого
                   </h2>
                   <p className="text-xl text-gray-600 leading-relaxed">
-                    Целевые сегменты пользователей
+                  Платформа адаптирована под любой масштаб деятельности
                   </p>
                 </div>
               </FadeUp>
@@ -242,10 +242,10 @@ export default function AboutProject() {
                 <div className="sticky top-32">
                   <div className="text-[160px] font-bold leading-none mb-4" style={{ color: '#FA9819' }}>04</div>
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    Преимущества
+                  RentFlow
                   </h2>
                   <p className="text-xl text-gray-600 leading-relaxed">
-                    Почему RentFlow лучше
+                   – ваше преимущество
                   </p>
                 </div>
               </FadeUp>
@@ -331,8 +331,7 @@ export default function AboutProject() {
               Готовы начать?
             </h2>
             <p className="text-2xl text-gray-300 mb-12 leading-relaxed">
-              Станьте одним из первых пользователей RentFlow
-            </p>
+            Испытайте возможности RentFlow. Оставьте заявку на тестовый период и получите сопровождение менеджера в подарок!              </p>
             <button className="px-12 py-5 text-white text-lg font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-2xl" style={{ background: 'linear-gradient(135deg, #FA9819 0%, #CD4900 100%)' }}>
               Оставить заявку
             </button>

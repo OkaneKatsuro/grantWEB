@@ -8,11 +8,11 @@ interface LogoProps {
     iconColor?: string;
 }
 
-export default function Logo({ size, textSize = "text-3xl", bold = "font-bold", color = "", iconColor = "" }: LogoProps) {
+export default function Logo({ size, textSize = "text-3xl", bold = "font-bold", color = "black", iconColor = "" }: LogoProps) {
     return (
         <>
             <GitPullRequestArrow size={size} color={iconColor} />
-            <div className={`font-ru ${textSize} ${bold} ${color} `}>
+            <div className={`font-ru ${textSize} ${bold} ${color} text-black `}>
                 RentFlow
             </div>
         </>
