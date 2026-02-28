@@ -20,9 +20,8 @@ export default function TelegramAuthPage() {
     }
   };
 
-  const storeAndRedirect = (tokens: { accessToken: string; refreshToken: string }) => {
-    localStorage.setItem("accessToken", tokens.accessToken);
-    localStorage.setItem("refreshToken", tokens.refreshToken);
+  const storeAndRedirect = (result: { accessToken: string }) => {
+    localStorage.setItem("accessToken", result.accessToken);
     window.location.href = "/";
   };
 
@@ -43,6 +42,7 @@ export default function TelegramAuthPage() {
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify({ sessionId }),
           }
         );
@@ -86,6 +86,7 @@ export default function TelegramAuthPage() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify({ tgAuthResult }),
         }
       );
