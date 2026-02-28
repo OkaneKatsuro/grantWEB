@@ -20,18 +20,14 @@ export default function TelegramAuthPage() {
         throw new Error("Параметр tgAuthResult не найден в URL");
       }
 
-      // base64url → base64 → decode
-      const base64url = match[1];
-      const base64 = base64url.replace(/-/g, "+").replace(/_/g, "/");
-      const json = atob(base64);
-      const data = JSON.parse(json);
+      const tgAuthResult = match[1];
 
       const res = await fetch(
         "https://api.rentflow.tech/auth/telegram/verify",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ tgAuthResult }),
         }
       );
 
